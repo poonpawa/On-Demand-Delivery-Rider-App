@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text } from 'react-native-elements';
 import firebase from '@react-native-firebase/app';
 import Geolocation from "../components/geolocation";
 
@@ -11,7 +11,8 @@ const home = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={{ fontSize: 40 }}>Welcome {displayName}</Text>
+            <Text h2>Rider's App</Text>
+            <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text>
             <Geolocation />
             <Button title="Sign-Out" buttonStyle={styles.btn} onPress={() => {
                 signOut(navigate)
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         width: 100,
-        color: "#333334",
+        backgroundColor: "#C75300",
         marginTop: 40
     }
 })

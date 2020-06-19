@@ -8,25 +8,25 @@ const UserService = () => {
     //for creating initial user entry
     const AddUserDetails = (userData) => {
         const { name, email } = userData;
-        firestore().collection('Buyers').doc(userId).set({
+        firestore().collection('Riders').doc(userId).set({
             Name: name,
             Email: email
         })
     }
 
-    //for real time buyers location update
+    //for real time Riders location update
     const UpdateLocation = (value) => {
-        const collRef = firestore().collection('Buyers').doc(userId)
+        const collRef = firestore().collection('Riders').doc(userId)
 
         collRef.update({
             Location: new firestore.GeoPoint(value.latitude, value.longitude)
         })
     }
 
-    //To add values in Buyers collection
+    //To add values in Ridersnpm n collection
     const AddData = (key, value) => {
         if (value) {
-            const dbReference = firestore().collection('Buyers').doc(userId)
+            const dbReference = firestore().collection('Riders').doc(userId)
 
             let data = {}
             data[key] = value
