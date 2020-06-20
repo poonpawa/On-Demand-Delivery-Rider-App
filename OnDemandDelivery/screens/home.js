@@ -3,11 +3,17 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import firebase from '@react-native-firebase/app';
 import Geolocation from "../components/geolocation";
+import NotificationTokenService from "../services/notification-token-service";
 
 const home = (props) => {
     let useObj = {};
     const { navigate } = props.navigation;
     const displayName = firebase.auth().currentUser.displayName;
+
+    useEffect(() => {
+        //get Token for every logged-in user & store in db
+        NotificationTokenService().getTokenAndStore()
+    }, [])
 
     return (
         <View style={styles.container}>
