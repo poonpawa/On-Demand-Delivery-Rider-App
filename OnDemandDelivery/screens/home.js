@@ -4,6 +4,8 @@ import { Button, Text } from 'react-native-elements';
 import firebase from '@react-native-firebase/app';
 import Geolocation from "../components/geolocation";
 import NotificationTokenService from "../services/notification-token-service";
+import AvailabilitySwitch from "../components/availaibilitySwitch";
+import UserService from '../services/user-service';
 
 const home = (props) => {
     let useObj = {};
@@ -20,6 +22,7 @@ const home = (props) => {
             <Text h2>Rider's App</Text>
             <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text>
             <Geolocation />
+            <AvailabilitySwitch />
             <Button title="Sign-Out" buttonStyle={styles.btn} onPress={() => {
                 signOut(navigate)
             }} />
