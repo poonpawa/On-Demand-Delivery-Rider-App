@@ -23,7 +23,7 @@ const NotificationTokenService = () => {
             .collection('Riders')
             .doc(userId)
             .update({
-                NotificationTokens: firestore.FieldValue.arrayUnion(token),  //a user can be logged in from multiple devices
+                NotificationTokens: token,
             });
     }
 

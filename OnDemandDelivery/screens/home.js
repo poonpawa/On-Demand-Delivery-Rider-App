@@ -9,7 +9,7 @@ import UserService from '../services/user-service';
 import messaging from '@react-native-firebase/messaging';
 
 const home = (props) => {
-    let useObj = {};
+    let useObj = {}
     const { navigate } = props.navigation;
     const displayName = firebase.auth().currentUser.displayName;
 
@@ -17,7 +17,7 @@ const home = (props) => {
         //get Token for every logged-in user & store in db
         NotificationTokenService().getTokenAndStore()
         messaging().onMessage((payload) => {
-            console.log('Message received. ', payload);
+            navigate('OrderListing', { payload })
         });
     }, [])
 

@@ -1,5 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import Home from '../screens/home';
+import OrderListing from '../screens/orderListing';
 
 const tabConfig = {
     initialRouteName: 'Home',
@@ -8,7 +9,8 @@ const tabConfig = {
 }
 
 const routeConfig = {
-    Home: Home
+    Home: Home,
+    OrderListing: OrderListing
 }
 
 const AppNavigator = new createStackNavigator(routeConfig, tabConfig)
