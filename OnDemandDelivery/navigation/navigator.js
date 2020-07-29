@@ -66,8 +66,18 @@ const AuthNavigation = () => {
 }
 
 const navigator = () => {
+    const linking = {
+        prefixes: ['OnDemand://delivery', 'https://www.onDemand.com'],
+        config: {
+            screens: {
+                availabilityScreen: 'home',
+                Order: 'order',
+                App: 'app'
+            },
+        },
+    };
     return (
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
             <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Loading" component={Loading} />
                 <Stack.Screen name="App" component={AppNavigation} />
