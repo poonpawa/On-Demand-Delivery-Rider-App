@@ -1,10 +1,23 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Card, Text, Icon } from 'react-native-elements';
+import NotificationTokenService from '../services/notification-token-service';
 
-export default function orderListing({ navigation }) {
-    if (navigation.state) {
-        let orderDetails = navigation.state.params.payload.data;
+export default function orderListing({ navigation, route }) {
+
+    const orderResponse = (response, buyerToken, orderNumber) => {
+        NotificationTokenService().sendResponseToBuyer(response, buyerToken, orderNumber).then((res) => {
+            if (res) {
+                console.log('order Accepted');
+            } else {
+                console.log('order Rejected');
+            }
+
+        })
+    }
+
+    if (route.params) {
+        let orderDetails = route.params.payload.data;
         return (
             <View>
                 <Card title='Order Details'>
@@ -19,10 +32,10 @@ export default function orderListing({ navigation }) {
                     <Text style={{ marginBottom: 10 }}>Store : {orderDetails.store}</Text>
                     <Button
                         buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                        title='Accept' />
+                        title='Accept' onPress={() => orderResponse(1, orderDetails.token, orderDetails.orderNumber)} />
                     <Button
                         buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                        title='Reject' />
+                        title='Reject' onPress={() => orderResponse(0, orderDetails.token, orderDetails.orderNumber)} />
                 </Card>
             </View>
         )

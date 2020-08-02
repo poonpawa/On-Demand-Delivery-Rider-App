@@ -5,7 +5,6 @@ import firebase from '@react-native-firebase/app';
 import Geolocation from "../components/geolocation";
 import NotificationTokenService from "../services/notification-token-service";
 import AvailabilitySwitch from "../components/availaibilitySwitch";
-import UserService from '../services/user-service';
 import messaging from '@react-native-firebase/messaging';
 
 const home = (props) => {
@@ -17,7 +16,7 @@ const home = (props) => {
         //get Token for every logged-in user & store in db
         NotificationTokenService().getTokenAndStore()
         messaging().onMessage((payload) => {
-            navigate('OrderListing', { payload })
+            navigate('orderListing', { payload })
         });
     }, [])
 
