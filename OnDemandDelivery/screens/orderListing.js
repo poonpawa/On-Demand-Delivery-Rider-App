@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Card, Text, Icon } from 'react-native-elements';
 import NotificationTokenService from '../services/notification-token-service';
 
-export default function orderListing({ navigation, route }) {
-
-    const orderResponse = (response, buyerToken, orderNumber) => {
-        NotificationTokenService().sendResponseToBuyer(response, buyerToken, orderNumber).then((res) => {
+export default function orderListing(props) {
+    const [isOrderAccepted, setIsOrderAccepted] = useState(false)
+    const orderResponse = (response, orderDetails) => {
+        NotificationTokenService().sendResponseToBuyer(response, orderDetails).then((res) => {
             if (res) {
+                setIsOrderAccepted(true)
                 console.log('order Accepted');
             } else {
                 console.log('order Rejected');
@@ -16,8 +17,8 @@ export default function orderListing({ navigation, route }) {
         })
     }
 
-    if (route.params) {
-        let orderDetails = route.params.payload.data;
+    if (props.route.params) {
+        let orderDetails = props.route.params.payload.data;
         return (
             <View>
                 <Card title='Order Details'>
@@ -30,12 +31,22 @@ export default function orderListing({ navigation, route }) {
                     <Text style={{ marginBottom: 10 }}>Person : {orderDetails.number}</Text>
                     <Text style={{ marginBottom: 10 }}>Address : {orderDetails.address}</Text>
                     <Text style={{ marginBottom: 10 }}>Store : {orderDetails.store}</Text>
-                    <Button
-                        buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                        title='Accept' onPress={() => orderResponse(1, orderDetails.token, orderDetails.orderNumber)} />
-                    <Button
-                        buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                        title='Reject' onPress={() => orderResponse(0, orderDetails.token, orderDetails.orderNumber)} />
+                    {!isOrderAccepted ?
+                        <View>
+                            <Button
+                                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+                                title='Accept' onPress={() => orderResponse(1, orderDetails)} />
+                            <Button
+                                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+                                title='Reject' onPress={() => orderResponse(0, orderDetails)} />
+                        </View> :
+                        <View>
+                            <Button
+                                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+                                title='OrderDetails' onPress={() => props.navigation('orderDetails')} />
+                        </View>
+                    }
+
                 </Card>
             </View>
         )

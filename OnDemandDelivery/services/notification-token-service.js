@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import messaging from '@react-native-firebase/messaging';
 import firebase from "@react-native-firebase/app";
 import firestore from '@react-native-firebase/firestore';
+import UserService from '../services/user-service';
 
 const NotificationTokenService = () => {
 
@@ -27,7 +28,7 @@ const NotificationTokenService = () => {
             });
     }
 
-    const sendResponseToBuyer = async (response, buyerToken, orderNumber) => {
+    const sendResponseToBuyer = async (response, orderDetails) => {
         const URL = 'https://fcm.googleapis.com/fcm/send'
 
         let headers = new Headers({
@@ -35,12 +36,17 @@ const NotificationTokenService = () => {
             'Authorization': 'key=AAAA3XEoy8g:APA91bEmvcXQWmQc0P_0soiyVPu5SDjLGDTy6gzToQxcyF5yXMEEiAzFArYTNJlYkOHiRKkc9GV1NKg9fjCl8EY9ZBBQrL_27368oblCJdej3zjxbJ960BAB2Gzumtt3F-WSgvI2GiR4'
         })
 
+        var riderData = await UserService().getRiderData();
+
         const message = {
-            to: buyerToken,
+            to: orderDetails.token,
             data: {
-                orderNumber: orderNumber,
+                orderNumber: orderDetails.orderNumber,
                 time: new Date().toLocaleTimeString(),
-                response: response
+                response: response,
+                buyerToken: orderDetails.token,
+                riderToken: riderData.NotificationTokens,
+                orderDetails: orderDetails
             },
             priority: 'high'
         }

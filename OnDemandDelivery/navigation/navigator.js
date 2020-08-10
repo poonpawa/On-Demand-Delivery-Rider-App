@@ -8,6 +8,7 @@ import Register from '../screens/register';
 import Loading from '../screens/loading';
 import orderListing from '../screens/orderListing';
 import { Icon } from 'react-native-elements';
+import orderDetails from '../screens/orderDetails';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -42,7 +43,7 @@ const OrderNavigation = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="availabilityScreen" component={Home} />
             <Stack.Screen name="orderListing" component={orderListing} />
-            <Stack.Screen name="orderDetails" component={orderListing} />
+            <Stack.Screen name="orderDetails" component={orderDetails} />
         </Stack.Navigator>
     )
 }

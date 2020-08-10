@@ -36,6 +36,14 @@ const UserService = () => {
         }
     }
 
+    const getRiderData = async () => {
+        let userData;
+        await getRiderDBReference().get().then(function (doc) {
+            userData = doc.data()
+        });
+        return userData;
+    }
+
     const SetAvailability = (value) => {
         getRiderDBReference().update({
             IsAvailable: value
@@ -51,7 +59,7 @@ const UserService = () => {
     }
 
     return {
-        AddUserDetails, UpdateLocation, AddData, SetAvailability, getValue
+        AddUserDetails, UpdateLocation, AddData, SetAvailability, getValue, getRiderData
     }
 }
 
