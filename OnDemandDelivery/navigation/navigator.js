@@ -11,7 +11,6 @@ import orderListing from '../screens/orderListing';
 import { Icon } from 'react-native-elements';
 import orderDetails from '../screens/orderDetails';
 import ItemList from "../screens/ItemList";
-import { log } from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();

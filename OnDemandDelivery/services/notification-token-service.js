@@ -46,6 +46,7 @@ const NotificationTokenService = () => {
                 response: response,
                 buyerToken: orderDetails.token,
                 riderToken: riderData.NotificationTokens,
+                riderName: riderData.Name,
                 orderDetails: orderDetails
             },
             priority: 'high'
