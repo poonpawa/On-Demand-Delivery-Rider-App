@@ -41,18 +41,6 @@ const bottomNavigation = () => {
         </BottomTab.Navigator>
     )
 }
-//To do: figure out the navigation tab not working
-/* const onTabPress = () => {
-    const event = navigation.emit({
-        type: 'tabPress',
-        target: route.key,
-        canPreventDefault: true,
-    });
-
-    if (!isFocused && !event.defaultPrevented) {
-        navigation.navigate(route.name);
-    }
-}; */
 
 const TopTapNavigation = () => {
     return (
@@ -64,7 +52,7 @@ const TopTapNavigation = () => {
             })} />
             <TopTab.Screen name="itemsList" component={ItemList} listeners={({ navigation, route }) => ({
                 tabPress: e => {
-                    console.log("Pressed")
+                    navigation.navigate(route.name)
                 }
             })} />
         </TopTab.Navigator>
