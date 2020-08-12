@@ -2,14 +2,17 @@ import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Card, Text, Icon } from 'react-native-elements';
 import NotificationTokenService from '../services/notification-token-service';
+import UserService from "../services/user-service";
 
 export default function orderListing(props) {
     const [isOrderAccepted, setIsOrderAccepted] = useState(false)
+    var details = {}
     const orderResponse = (response, orderDetails) => {
         NotificationTokenService().sendResponseToBuyer(response, orderDetails).then((res) => {
             if (res) {
                 setIsOrderAccepted(true)
                 console.log('order Accepted');
+                UserService().AddData('orderID', props.route.params.payload.data.orderNumber);
             } else {
                 console.log('order Rejected');
             }
@@ -43,7 +46,12 @@ export default function orderListing(props) {
                         <View>
                             <Button
                                 buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                                title='OrderDetails' onPress={() => props.navigation('orderDetails')} />
+                                title='OrderDetails' onPress={() => props.navigation.navigate('orderDetails', {
+                                    screen: 'orderInformation',
+                                    params: {
+                                        orderID: orderDetails.orderNumber
+                                    }
+                                })} />
                         </View>
                     }
 
