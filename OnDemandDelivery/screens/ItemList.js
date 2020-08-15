@@ -37,16 +37,17 @@ const ItemList = ({ navigation }) => {
                 })
             }
             <Text>Total Price: {productData.totalPrice}</Text>
-            <ReachedStoreBtn />
+            <ReachedStoreBtn orderId={productData.id} />
+
         </View>
 
     )
 }
-
-export default ItemList
 
 const styles = StyleSheet.create({
     container: {
         padding: 15
     }
 })
+
+export default ItemList

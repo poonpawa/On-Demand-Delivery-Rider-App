@@ -11,8 +11,17 @@ const OrderService = () => {
 
     }
 
+    //To update values in  order collection
+    const updateData = (orderId, key, value) => {
+        if (value) {
+            let data = {}
+            data[key] = value
+            firestore().collection('Orders').doc(orderId).update(data)
+        }
+    }
+
     return {
-        getOrderData
+        getOrderData, updateData
     }
 }
 
