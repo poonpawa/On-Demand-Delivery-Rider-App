@@ -20,13 +20,13 @@ const orderDetails = ({ navigation, route }) => {
         <View style={{ margin: 20 }}>
             {orderData ?
                 <View>
-                    < Text > Order Id: {orderData.id}</Text >
+                    <Text>{orderData.id}</Text>
                     <Text>Time: {orderData.riderStatus.timeUpdated}</Text>
                     <Text>Address: {orderData.shippingAddress} </Text>
                     <Text>Store: {orderData.store}</Text>
                     <Text>Contact: {orderData.id}</Text>
                     <ReachedStoreBtn />
-                </View >
+                </View>
                 : null}
         </View>
 
