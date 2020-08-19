@@ -8,7 +8,6 @@ const OrderService = () => {
             data = doc.data();
         })
         return data;
-
     }
 
     //To update values in  order collection

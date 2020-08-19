@@ -37,7 +37,7 @@ const ItemList = ({ navigation }) => {
                 })
             }
             <Text>Total Price: {productData.totalPrice}</Text>
-            <ReachedStoreBtn orderId={productData.id} />
+            <ReachedStoreBtn orderId={productData.id} navigate={navigation.navigate} />
 
         </View>
 

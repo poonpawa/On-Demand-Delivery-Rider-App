@@ -25,7 +25,7 @@ const orderDetails = ({ navigation, route }) => {
                     <Text>Address: {orderData.shippingAddress} </Text>
                     <Text>Store: {orderData.store}</Text>
                     <Text>Contact: {orderData.id}</Text>
-                    <ReachedStoreBtn orderId={orderData.id} />
+                    <ReachedStoreBtn orderId={orderData.id} navigate={navigation.navigate} />
                 </View>
                 : null}
         </View>

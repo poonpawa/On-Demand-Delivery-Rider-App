@@ -11,6 +11,7 @@ const reachedStoreBtn = (props) => {
             setStatusChanged(true)
         } else {
             OrderService().updateData(orderId, 'riderStatus.status', 'Rider is on the way to your place')
+            props.navigate('tracking', { orderId })
         }
 
     }

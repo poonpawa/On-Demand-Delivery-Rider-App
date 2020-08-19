@@ -7,10 +7,11 @@ import Home from '../screens/home';
 import Login from '../screens/login';
 import Register from '../screens/register';
 import Loading from '../screens/loading';
-import orderListing from '../screens/orderListing';
+import OrderListing from '../screens/orderListing';
 import { Icon } from 'react-native-elements';
-import orderDetails from '../screens/orderDetails';
+import OrderDetails from '../screens/orderDetails';
 import ItemList from "../screens/ItemList";
+import Tracking from "../screens/tracking";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -25,7 +26,7 @@ const bottomNavigation = () => {
                         <Icon type='octicon' name='package' />
                     )
                 }} />
-            <BottomTab.Screen name="OrderHistory" component={orderListing}
+            <BottomTab.Screen name="OrderHistory" component={OrderListing}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <Icon name='history' />
@@ -44,7 +45,7 @@ const bottomNavigation = () => {
 const TopTapNavigation = () => {
     return (
         <TopTab.Navigator>
-            <TopTab.Screen name="orderInformation" component={orderDetails} listeners={({ navigation, route }) => ({
+            <TopTab.Screen name="orderInformation" component={OrderDetails} listeners={({ navigation, route }) => ({
                 tabPress: e => {
                     navigation.navigate(route.name)
                 }
@@ -62,7 +63,7 @@ const OrderNavigation = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="availabilityScreen" component={Home} />
-            <Stack.Screen name="orderListing" component={orderListing} />
+            <Stack.Screen name="orderListing" component={OrderListing} />
         </Stack.Navigator>
     )
 }
@@ -72,6 +73,7 @@ const AppNavigation = () => {
         <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={bottomNavigation} />
             <Stack.Screen name="orderDetails" component={TopTapNavigation} />
+            <Stack.Screen name="tracking" component={Tracking} />
         </Stack.Navigator>
     )
 }
