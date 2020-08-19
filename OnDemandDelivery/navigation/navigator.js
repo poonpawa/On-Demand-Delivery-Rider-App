@@ -12,6 +12,7 @@ import { Icon } from 'react-native-elements';
 import OrderDetails from '../screens/orderDetails';
 import ItemList from "../screens/ItemList";
 import Tracking from "../screens/tracking";
+import Delivered from "../screens/delivered";
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -74,6 +75,8 @@ const AppNavigation = () => {
             <Stack.Screen name="Home" component={bottomNavigation} />
             <Stack.Screen name="orderDetails" component={TopTapNavigation} />
             <Stack.Screen name="tracking" component={Tracking} />
+            <Stack.Screen name="delivered" component={Delivered} />
+
         </Stack.Navigator>
     )
 }
