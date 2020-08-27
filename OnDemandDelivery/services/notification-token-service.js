@@ -3,6 +3,7 @@ import messaging from '@react-native-firebase/messaging';
 import firebase from "@react-native-firebase/app";
 import firestore from '@react-native-firebase/firestore';
 import UserService from '../services/user-service';
+import { lessThan } from 'react-native-reanimated';
 
 const NotificationTokenService = () => {
 
@@ -36,7 +37,8 @@ const NotificationTokenService = () => {
             'Authorization': 'key=AAAA3XEoy8g:APA91bEmvcXQWmQc0P_0soiyVPu5SDjLGDTy6gzToQxcyF5yXMEEiAzFArYTNJlYkOHiRKkc9GV1NKg9fjCl8EY9ZBBQrL_27368oblCJdej3zjxbJ960BAB2Gzumtt3F-WSgvI2GiR4'
         })
 
-        var riderData = await UserService().getRiderData();
+        let riderData = await UserService().getRiderData();
+        let riderId = firebase.auth().currentUser.uid;
 
         const message = {
             to: orderDetails.token,
@@ -46,6 +48,7 @@ const NotificationTokenService = () => {
                 response: response,
                 buyerToken: orderDetails.token,
                 riderToken: riderData.NotificationTokens,
+                riderId: riderId,
                 riderName: riderData.Name,
                 orderDetails: orderDetails
             },

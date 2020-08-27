@@ -4,23 +4,25 @@ import { Button } from "react-native-elements";
 import OrderService from '../services/order-service';
 import UserService from "../services/user-service";
 import MapView, { Marker } from 'react-native-maps';
+import firestore from '@react-native-firebase/firestore';
 
 const tracking = (props) => {
     const [orderData, setorderData] = useState()
-    const [RiderLocation, setRiderLocation] = useState(null)
+    const [riderLocation, setRiderLocation] = useState(null)
+    const [buyerLocation, setBuyerLocation] = useState(null)
     let orderId = props.route.params.orderId;
     useEffect(() => {
         OrderService().getOrderData(orderId).then((response) => {
             setorderData(response)
+            firestore().collection("Buyers").doc(response.buyerId).get().then((doc) => {
+                setBuyerLocation(doc.data()["Location"])
+            })
         })
 
         UserService().getValue('Location').then((data) => {
             setRiderLocation(data)
-            console.log(RiderLocation)
         })
     }, [])
-
-
 
     const orderDelivered = (orderId) => {
         OrderService().updateData(orderId, 'riderStatus.status', 'Order Delivered')
@@ -30,23 +32,28 @@ const tracking = (props) => {
     return (
         <View>
             <Text>Order ID:{orderId}</Text>
-            {orderData ?
-                <View>
+            {orderData && buyerLocation && riderLocation ?
+                <View style={styles.container}>
                     <Text>Address: {orderData.shippingAddress}</Text>
                     <View style={styles.mapContainer}>
                         <MapView
                             style={styles.map}
                             initialRegion={{
-                                latitude: 37.78825,
-                                longitude: -122.4324,
-                                latitudeDelta: 0.0922,
-                                longitudeDelta: 0.0421,
+                                latitude: riderLocation.latitude,
+                                longitude: riderLocation.longitude,
+                                latitudeDelta: 0.012,
+                                longitudeDelta: 0.011,
                             }}
                         >
                             <Marker
-                                coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
+                                coordinate={{ latitude: buyerLocation.latitude, longitude: buyerLocation.longitude }}
                                 title="buyer"
-                                image={require('../assets/Icons/BM.png')}
+                                image={require('../assets/Icons/Buyer_marker.png')}
+                            />
+                            <Marker
+                                coordinate={{ latitude: riderLocation.latitude, longitude: riderLocation.longitude }}
+                                title="Rider"
+                                image={require('../assets/Icons/Rider_marker.png')}
                             />
                         </MapView>
                     </View>
