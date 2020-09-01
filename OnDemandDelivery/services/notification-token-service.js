@@ -39,14 +39,16 @@ const NotificationTokenService = () => {
 
         let riderData = await UserService().getRiderData();
         let riderId = firebase.auth().currentUser.uid;
+        let buyerDetails = JSON.parse(orderDetails.buyer)
 
         const message = {
-            to: orderDetails.token,
+            to: buyerDetails.token,
             data: {
                 orderNumber: orderDetails.orderNumber,
                 time: new Date().toLocaleTimeString(),
                 response: response,
-                buyerToken: orderDetails.token,
+                buyerToken: buyerDetails.token,
+                buyerLocation: buyerDetails.location,
                 riderToken: riderData.NotificationTokens,
                 riderId: riderId,
                 riderName: riderData.Name,

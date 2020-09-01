@@ -22,7 +22,7 @@ const orderDetails = ({ navigation, route }) => {
                     <Text>{orderData.id}</Text>
                     <Text>Time: {orderData.riderStatus.timeUpdated}</Text>
                     <Text>Address: {orderData.shippingAddress} </Text>
-                    <NavigateBtn />
+                    <NavigateBtn orderId={orderData.id} />
                     <Text>Store: {orderData.store}</Text>
                     <Text>Contact: {orderData.id}</Text>
                     <ReachedStoreBtn orderId={orderData.id} navigate={navigation.navigate} />

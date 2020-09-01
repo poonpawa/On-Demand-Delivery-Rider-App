@@ -1,16 +1,21 @@
 import React from 'react'
 import { StyleSheet, View, Linking } from 'react-native'
 import { Button } from "react-native-elements";
+import OrderService from '../services/order-service';
 
-const navigateBtn = () => {
-    const startNavigation = async () => {
-        const url = 'google.navigation:q=53.395529999999994,-6.185311666666666';
-        const supported = await Linking.canOpenURL(url);
-        if (supported) {
-            await Linking.openURL(url);
-        } else {
-            Alert.alert(`Don't know how to open this URL: ${url}`);
-        }
+const navigateBtn = (props) => {
+    const startNavigation = () => {
+        OrderService().getOrderData(props.orderId).then((result) => {
+            let coordinates = JSON.parse(result.destination);
+            const url = `google.navigation:q=${coordinates._latitude},${coordinates._longitude}`;
+            const supported = Linking.canOpenURL(url);
+            if (supported) {
+                Linking.openURL(url);
+            } else {
+                Alert.alert(`Don't know how to open this URL: ${url}`);
+            }
+        })
+
     }
 
     return (

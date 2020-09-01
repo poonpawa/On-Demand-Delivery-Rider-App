@@ -32,7 +32,7 @@ export default function orderListing(props) {
                         Time : {orderDetails.time}
                     </Text>
                     <Text style={{ marginBottom: 10 }}>Person : {orderDetails.number}</Text>
-                    <Text style={{ marginBottom: 10 }}>Address : {orderDetails.address}</Text>
+                    <Text style={{ marginBottom: 10 }}>Address : {orderDetails.buyer.address}</Text>
                     <Text style={{ marginBottom: 10 }}>Store : {orderDetails.store}</Text>
                     {!isOrderAccepted ?
                         <View>
