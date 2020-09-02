@@ -57,7 +57,7 @@ const onlogin = (email, password, navigate) => {
         .signInWithEmailAndPassword(email, password)
         .then(() => {
             console.log("signed-In");
-            navigate("Home")
+            navigate("App")
 
         })
         .catch(error => {

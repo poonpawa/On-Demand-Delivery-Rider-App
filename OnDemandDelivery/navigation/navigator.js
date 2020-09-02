@@ -15,7 +15,6 @@ import Tracking from "../screens/tracking";
 import Delivered from "../screens/delivered";
 import SplashScreen from '../screens/splashScreen';
 import { View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();

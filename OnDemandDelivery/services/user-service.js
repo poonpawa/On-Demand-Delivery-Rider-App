@@ -11,10 +11,11 @@ const UserService = () => {
 
     //for creating initial user entry
     const AddUserDetails = (userData) => {
-        const { name, email } = userData;
+        const { name, email, phone } = userData;
         getRiderDBReference().set({
             Name: name,
             Email: email,
+            Phone: phone,
             IsAvailable: false
         })
     }

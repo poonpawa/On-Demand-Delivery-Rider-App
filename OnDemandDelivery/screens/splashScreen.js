@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 
 const splashScreen = ({ navigation }) => {
     return (
-        <View>
+        <View style={styles.container}>
             <Text>splashScreen</Text>
             <Button
                 buttonStyle={{ borderRadius: 0, marginVertical: 10, marginHorizontal: 20 }}
@@ -18,4 +18,10 @@ const splashScreen = ({ navigation }) => {
 
 export default splashScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+})
