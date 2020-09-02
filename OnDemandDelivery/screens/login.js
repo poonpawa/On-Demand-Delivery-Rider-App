@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20
     },
     title: {
-        marginTop: 15,
+        marginTop: 35,
         fontSize: 30,
         fontWeight: "100",
         textAlign: "center"

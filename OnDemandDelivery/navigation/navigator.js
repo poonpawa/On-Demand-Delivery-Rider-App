@@ -8,11 +8,14 @@ import Login from '../screens/login';
 import Register from '../screens/register';
 import Loading from '../screens/loading';
 import OrderListing from '../screens/orderListing';
-import { Icon } from 'react-native-elements';
+import { Text, Icon, Button } from 'react-native-elements';
 import OrderDetails from '../screens/orderDetails';
 import ItemList from "../screens/ItemList";
 import Tracking from "../screens/tracking";
 import Delivered from "../screens/delivered";
+import SplashScreen from '../screens/splashScreen';
+import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -76,17 +79,30 @@ const AppNavigation = () => {
             <Stack.Screen name="orderDetails" component={TopTapNavigation} />
             <Stack.Screen name="tracking" component={Tracking} />
             <Stack.Screen name="delivered" component={Delivered} />
-
         </Stack.Navigator>
     )
 }
 
 const AuthNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Login" component={Login} />
+        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: true }} >
+            <Stack.Screen name="Login" component={Login} options={{
+                header: ({ navigation }) => (
+                    <View style={{ height: 30, marginVertical: 10 }}>
+                        <Text style={{ width: 30 }}>Title</Text>
+                        <Button
+                            icon={{
+                                name: "close",
+                                size: 26,
+                                color: 'white'
+                            }}
+                            onPress={() => navigation.goBack()}
+                        />
+                    </View>
+                )
+            }} />
             <Stack.Screen name="Register" component={Register} />
-        </Stack.Navigator>
+        </Stack.Navigator >
     )
 
 }
@@ -104,7 +120,8 @@ const navigator = () => {
     };
     return (
         <NavigationContainer linking={linking}>
-            <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Loading" component={Loading} />
                 <Stack.Screen name="App" component={AppNavigation} />
                 <Stack.Screen name="Auth" component={AuthNavigation} />
