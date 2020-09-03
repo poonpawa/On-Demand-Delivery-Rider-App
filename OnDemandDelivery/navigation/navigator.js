@@ -15,6 +15,8 @@ import Tracking from "../screens/tracking";
 import Delivered from "../screens/delivered";
 import SplashScreen from '../screens/splashScreen';
 import { View } from 'react-native';
+import Account from '../screens/account';
+import OrderHistory from '../screens/orderHistory';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -29,13 +31,13 @@ const bottomNavigation = () => {
                         <Icon type='octicon' name='package' />
                     )
                 }} />
-            <BottomTab.Screen name="OrderHistory" component={OrderListing}
+            <BottomTab.Screen name="OrderHistory" component={OrderHistory}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <Icon name='history' />
                     )
                 }} />
-            <BottomTab.Screen name="Account" component={Home}
+            <BottomTab.Screen name="Account" component={Account}
                 options={{
                     tabBarIcon: ({ focused, color, size }) => (
                         <Icon name='account-box' />
@@ -119,7 +121,7 @@ const navigator = () => {
     };
     return (
         <NavigationContainer linking={linking}>
-            <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+            <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Splash" component={SplashScreen} />
                 <Stack.Screen name="Loading" component={Loading} />
                 <Stack.Screen name="App" component={AppNavigation} />

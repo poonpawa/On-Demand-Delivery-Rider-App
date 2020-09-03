@@ -19,8 +19,18 @@ const OrderService = () => {
         }
     }
 
+    const getAllOrders = async (riderId) => {
+        let allOrders = [];
+        await firestore().collection('Orders').where('riderId', '==', riderId).get().then((doc) => {
+            doc.forEach(item => {
+                allOrders.push(item.data())
+            });
+        })
+        return allOrders
+    }
+
     return {
-        getOrderData, updateData
+        getOrderData, updateData, getAllOrders
     }
 }
 
