@@ -8,15 +8,15 @@ import Login from '../screens/login';
 import Register from '../screens/register';
 import Loading from '../screens/loading';
 import OrderListing from '../screens/orderListing';
-import { Text, Icon, Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import OrderDetails from '../screens/orderDetails';
 import ItemList from "../screens/ItemList";
 import Tracking from "../screens/tracking";
 import Delivered from "../screens/delivered";
 import SplashScreen from '../screens/splashScreen';
-import { View } from 'react-native';
 import Account from '../screens/account';
 import OrderHistory from '../screens/orderHistory';
+import ModalHeader from '../components/headers/modalHeader';
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -89,20 +89,14 @@ const AuthNavigation = () => {
         <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: true }} >
             <Stack.Screen name="Login" component={Login} options={{
                 header: ({ navigation }) => (
-                    <View style={{ height: 30, marginVertical: 10 }}>
-                        <Text style={{ width: 30 }}>Title</Text>
-                        <Button
-                            icon={{
-                                name: "close",
-                                size: 26,
-                                color: 'white'
-                            }}
-                            onPress={() => navigation.goBack()}
-                        />
-                    </View>
+                    <ModalHeader navigation={navigation} title={'Login'} />
                 )
             }} />
-            <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="Register" component={Register} options={{
+                header: ({ navigation }) => (
+                    <ModalHeader navigation={navigation} title={'Create an account'} />
+                )
+            }} />
         </Stack.Navigator >
     )
 

@@ -26,19 +26,8 @@ const home = (props) => {
             <Text style={{ fontSize: 25 }}>Welcome <Text style={{ color: "#C75300", fontWeight: "bold" }}>{displayName}</Text></Text>
             <Geolocation />
             <AvailabilitySwitch />
-            <Button title="Sign-Out" buttonStyle={styles.btn} onPress={() => {
-                signOut(navigate)
-            }} />
         </View>
     )
-}
-
-const signOut = (navigate) => {
-    firebase.auth().signOut()
-        .then(() => {
-            console.log('User signed out!')
-            navigate('Auth')
-        });
 }
 
 const styles = StyleSheet.create({
