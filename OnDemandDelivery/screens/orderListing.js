@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { Button, Card, Text, Icon } from 'react-native-elements';
 import NotificationTokenService from '../services/notification-token-service';
 import UserService from "../services/user-service";
@@ -23,39 +23,75 @@ export default function orderListing(props) {
     if (props.route.params) {
         let orderDetails = props.route.params.payload.data;
         return (
-            <View>
-                <Card title='Order Details'>
-                    <Text style={{ marginBottom: 10 }}>
-                        Order Id : {orderDetails.orderNumber}
-                    </Text>
-                    <Text style={{ marginBottom: 10 }}>
-                        Time : {orderDetails.time}
-                    </Text>
-                    <Text style={{ marginBottom: 10 }}>Person : {orderDetails.number}</Text>
-                    <Text style={{ marginBottom: 10 }}>Address : {orderDetails.buyer.address}</Text>
-                    <Text style={{ marginBottom: 10 }}>Store : {orderDetails.store}</Text>
+            <View style={styles.container}>
+                <Text style={styles.heading}>
+                    Orders
+                </Text>
+                
+                <View style={styles.EachOrderContainer}>
+                    <View style={styles.eachRow}>
+                        <Text style={styles.leftList}>
+                            Order Id
+                        </Text>
+                        <Text style={styles.leftRight}>
+                            {orderDetails.orderNumber}
+                        </Text>
+                    </View>
+                    <View style={styles.eachRow}>
+                        <Text style={styles.leftList}>
+                            Time
+                        </Text>
+                        <Text style={styles.leftRight}>
+                            {orderDetails.time}
+                        </Text>
+                    </View>
+                    <View style={styles.eachRow}>
+                        <Text style={styles.leftList}>
+                            Person
+                        </Text>
+                        <Text style={styles.leftRight}>
+                            {orderDetails.number}
+                        </Text>
+                    </View>
+                    <View style={styles.eachRow}>
+                        <Text style={styles.leftList}>
+                            Address
+                        </Text>
+                        <Text style={styles.leftRight}>
+                            {orderDetails.buyer.address}
+                        </Text>
+                    </View>
+                    
                     {!isOrderAccepted ?
-                        <View>
-                            <Button
-                                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                                title='Accept' onPress={() => orderResponse(1, orderDetails)} />
-                            <Button
-                                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                                title='Reject' onPress={() => orderResponse(0, orderDetails)} />
+                        <View style={styles.buttonAcceptReject}>
+                            <TouchableOpacity onPress={() => orderResponse(0, orderDetails)} style={styles.btnReject}>
+                                <Text style={styles.textReject}>
+                                    Reject
+                                </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => orderResponse(1, orderDetails)} style={styles.btnAccept}>
+                                <Text style={styles.textAccept}>
+                                    Accept
+                                </Text>
+                            </TouchableOpacity>
                         </View> :
-                        <View>
-                            <Button
-                                buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                                title='OrderDetails' onPress={() => props.navigation.navigate('orderDetails', {
+                        <View style={styles.buttonOrderDetailsContainer}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('orderDetails', {
                                     screen: 'orderInformation',
                                     params: {
                                         orderID: orderDetails.orderNumber
                                     }
-                                })} />
+                                })} style={styles.btnOrderDetails}>
+                                <View>
+                                    <Text style={styles.textOrderDetails}>
+                                        Order Details
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     }
-
-                </Card>
+                </View>
             </View>
         )
     } else {
@@ -72,7 +108,80 @@ export default function orderListing(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
+        height: '100%',
+        backgroundColor: 'white',
+        paddingRight: 16,
+        paddingLeft: 16
+    },
+    heading: {
+        fontFamily: "NunitoSans-Bold",
+        fontSize: 24,
+        color: '#383F51',
+        marginTop: 16,
+    },
+    EachOrderContainer: {
+        borderColor: '#ECECF6',
+        borderWidth: 1,   
+        marginTop: 16,
+        borderRadius: 4
+    },
+    eachRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 12,
+        paddingLeft: 16,
+        paddingRight: 16
+    },
+    leftList: {
+        color: '#6A748A',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
+        width: 100,
+    },
+    rightList: {
+        color: '#383F51',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
+    },
+    buttonAcceptReject: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 16
+    },
+    btnAccept: {
+        height: 40,
+        justifyContent: 'center',
+        textAlign: 'center',
+        flex: 1,
+        backgroundColor: '#C75300',
+        borderBottomRightRadius: 4
+    },
+    textAccept: {
+        textAlign: 'center',
+        color: 'white',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
+    },
+    btnReject: {
+        height: 40,
+        justifyContent: 'center',
+        textAlign: 'center',
+        flex: 1,
+        backgroundColor: '#EECBB3',
+        borderBottomLeftRadius: 4
+    },
+    textReject: {
+        textAlign: 'center',
+        color: '#C75300',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
+    },
+    buttonOrderDetailsContainer: {
+        marginTop: 16
+    },
+    btnOrderDetails: {
+        backgroundColor: '#C75300',
+        borderBottomLeftRadius: 4,
+        borderBottomRightRadius: 4
     }
 })
