@@ -83,11 +83,9 @@ export default function orderListing(props) {
                                         orderID: orderDetails.orderNumber
                                     }
                                 })} style={styles.btnOrderDetails}>
-                                <View>
-                                    <Text style={styles.textOrderDetails}>
-                                        Order Details
-                                    </Text>
-                                </View>
+                                <Text style={styles.textOrderDetails}>
+                                    Order Details
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     }
@@ -180,8 +178,17 @@ const styles = StyleSheet.create({
         marginTop: 16
     },
     btnOrderDetails: {
+        height: 40,
+        justifyContent: 'center',
+        textAlign: 'center',
         backgroundColor: '#C75300',
         borderBottomLeftRadius: 4,
         borderBottomRightRadius: 4
+    },
+    textOrderDetails: {
+        textAlign: 'center',
+        color: 'white',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 16,
     }
 })
