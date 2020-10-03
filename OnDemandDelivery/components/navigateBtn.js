@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, Linking } from 'react-native'
-import { Button } from "react-native-elements";
+import { StyleSheet, View, Linking, TouchableOpacity } from 'react-native'
+import { Button, Image, Text } from "react-native-elements";
 import OrderService from '../services/order-service';
 
 const navigateBtn = (props) => {
@@ -20,13 +20,30 @@ const navigateBtn = (props) => {
 
     return (
         <View>
-            <Button
-                buttonStyle={{ borderRadius: 0, marginVertical: 10, marginHorizontal: 20 }}
-                title='navigate' onPress={() => startNavigation()} />
+            <TouchableOpacity onPress={() => startNavigation()}  style={styles.navigateContainer}>
+                <Image 
+                    style={styles.imgNavigate}
+                    source={require('../assets/Images/navigate.png')}
+                />
+                <Text style={styles.txtNavigate}>
+                    Navigate
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
 
 export default navigateBtn
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    navigateContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    txtNavigate: {
+        color: '#C75300',
+        fontFamily: "NunitoSans-SemiBold",
+        fontSize: 14,
+    }
+})

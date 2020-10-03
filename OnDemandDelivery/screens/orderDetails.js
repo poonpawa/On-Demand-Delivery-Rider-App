@@ -16,9 +16,9 @@ const orderDetails = ({ navigation, route }) => {
     }, [])
 
     return (
-        <View style={styles.orderDetails}>
+        <View style={styles.container}>
             {orderData ?
-                <View>
+                <View style={styles.orderDetails}>
                     <View style={styles.eachRow}>
                         <Text style={styles.leftList}>
                             Order Id
@@ -30,7 +30,7 @@ const orderDetails = ({ navigation, route }) => {
 
                     <View style={styles.eachRow}>
                         <Text style={styles.leftList}>
-                            Order Time placed
+                            Order Time
                         </Text>
                         <Text style={styles.leftRight}>
                             {orderData.riderStatus.timeUpdated}
@@ -67,7 +67,7 @@ const orderDetails = ({ navigation, route }) => {
                         </Text>
                     </View>
 
-                    <ReachedStoreBtn orderId={orderData.id} navigate={navigation.navigate} />
+                    <ReachedStoreBtn orderId={orderData.id} navigate={navigation.navigate} style={styles.reachedBtn}/>
                 </View>
                 : null}
         </View>
@@ -77,20 +77,28 @@ const orderDetails = ({ navigation, route }) => {
 export default orderDetails
 
 const styles = StyleSheet.create({
-    orderDetails: {
-        marginTop: 12,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+    container: {
+        flex: 1,
+        height: '100%',
+        backgroundColor: 'white',
+        paddingRight: 16,
+        paddingLeft: 16
+    },
+    reachedBtn: {
+        position: 'absolute',
+        bottom: 40
     },
     eachRow: {
         display: 'flex',
         flexDirection: 'row',
         marginTop: 12,
+        alignItems: 'center'
     },
     leftList: {
         color: '#6A748A',
         fontFamily: "NunitoSans-SemiBold",
         fontSize: 16,
+        width: 120,
     },
     rightList: {
         color: '#383F51',

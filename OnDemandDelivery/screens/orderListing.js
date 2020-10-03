@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import { Button, Card, Text, Icon } from 'react-native-elements';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { Button, Card, Icon } from 'react-native-elements';
 import NotificationTokenService from '../services/notification-token-service';
 import UserService from "../services/user-service";
 
@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     eachRow: {
         display: 'flex',
         flexDirection: 'row',
+        alignItems: 'center',
         marginTop: 12,
         paddingLeft: 16,
         paddingRight: 16
