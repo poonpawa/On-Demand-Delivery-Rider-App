@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { ListItem } from "react-native-elements";
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import { ListItem, Text } from "react-native-elements";
 import ReachedStoreBtn from "../components/reachedStoreBtn";
 import UserService from '../services/user-service';
 import OrderService from '../services/order-service';
@@ -48,7 +48,9 @@ const ItemList = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 15
+        padding: 15,
+        backgroundColor: 'white',
+        height: '100%'
     },
     eachproduct: {
         flexDirection: 'row',
@@ -56,10 +58,12 @@ const styles = StyleSheet.create({
         borderBottomColor: '#EFF2F9',
         borderWidth: 1,
         marginTop: 16,
-        paddingBottom: 16
+        paddingBottom: 16,
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     eachproductName: {
-        fontSize: 14,
+        fontSize: 16,
         color: '#3C465E',
         fontFamily: "NunitoSans-SemiBold",
     },
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
         color: '#383F51',
         fontFamily: "NunitoSans-Bold",
         fontSize: 16
-    },
+    }
 })
 
 export default ItemList
